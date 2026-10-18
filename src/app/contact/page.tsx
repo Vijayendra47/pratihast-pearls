@@ -28,7 +28,7 @@ export default function ContactAndB2B() {
 
           <div className="space-y-4 text-makhanaGreen-900 font-medium">
             <div className="flex items-start space-x-3"><MapPin className="text-gold-500 mt-1 flex-shrink-0" /><div><strong>Registered Hub:</strong><p className="text-sm text-gray-600">Pratihast Pearls Infrastructure, Near Historic Ponds, Mithila Region, Bihar, India</p></div></div>
-            <div className="flex items-center space-x-3"><Phone className="text-gold-500" /><span>+91 98765 43210</span></div>
+            <div className="flex items-center space-x-3"><Phone className="text-gold-500" /><span>+91 94314 74362</span></div>
             <div className="flex items-center space-x-3"><Mail className="text-gold-500" /><span>logistics@pratihastpearls.com</span></div>
           </div>
 
