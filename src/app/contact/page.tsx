@@ -2,12 +2,35 @@
 import React, { useState } from 'react';
 
 export default function ContactAndB2B() {
-  const [b2bForm, setB2bForm] = useState({ clientName: '', bizName: '', email: '', qty: '', note: '' });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleB2BSubmit = async (e: React.FormEvent) => {
+  const handleB2BSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      // आपका लाइव Formspree लिंक यहाँ इन्जेक्ट कर दिया है
+      const response = await fetch('https://formspree.io/f/mrpedkvp', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Enquiry transmission error. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please check connection.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,18 +59,18 @@ export default function ContactAndB2B() {
           <p style={{ color: '#777', fontSize: '0.9rem', marginBottom: '25px' }}>Connect with our primary supply desks for institutional pricing matrices.</p>
           
           {submitted ? (
-            <div style={{ padding: '20px', backgroundColor: '#F3F0E9', border: '1px solid #D4AF37', color: '#112412', borderRadius: '12px', textAlignment: 'center', fontWeight: 'bold' }}>
-              ✓ Wholesale Enquiry Transmitted Successfully!
+            <div style={{ padding: '20px', backgroundColor: '#F3F0E9', border: '1px solid #D4AF37', color: '#112412', borderRadius: '12px', textAlign: 'center', fontWeight: 'bold' }}>
+              ✓ Wholesale Enquiry Transmitted Successfully! We will contact you soon.
             </div>
           ) : (
             <form onSubmit={handleB2BSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <input required type="text" placeholder="Your Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="text" placeholder="Company Legal Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="email" placeholder="Corporate Email Address" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="number" placeholder="Target Quantity Requirements (in kg)" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <textarea placeholder="Tell us about your distribution parameters..." rows={4} style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px', resize: 'none' }} />
-              <button type="submit" style={{ backgroundColor: '#112412', color: '#D4AF37', border: 'none', fontWeight: 'bold', padding: '14px', borderRadius: '10px', cursor: 'pointer', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                Transmit Wholesale Request
+              <input required type="text" name="Client Name" placeholder="Your Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
+              <input required type="text" name="Company Name" placeholder="Company Legal Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
+              <input required type="email" name="Email" placeholder="Corporate Email Address" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
+              <input required type="number" name="Quantity Required (kg)" placeholder="Target Quantity Requirements (in kg)" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
+              <textarea name="Message" placeholder="Tell us about your distribution parameters..." rows={4} style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px', resize: 'none' }} />
+              <button type="submit" disabled={loading} style={{ backgroundColor: loading ? '#666' : '#112412', color: '#D4AF37', border: 'none', fontWeight: 'bold', padding: '14px', borderRadius: '10px', cursor: 'pointer', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {loading ? 'Transmitting Request...' : 'Transmit Wholesale Request'}
               </button>
             </form>
           )}
