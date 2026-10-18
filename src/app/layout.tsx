@@ -1,4 +1,5 @@
-import './globals.css'; // Includes fundamental @tailwind directives
+import './globals.css';
+import React from 'react';
 import { CartProvider } from '../context/CartContext';
 import Navbar from '../components/Navbar';
 
@@ -10,12 +11,39 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-pearl-50 antialiased selection:bg-gold-500 selection:text-makhanaGreen-900">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Tailwind CSS का पक्का और सीधा डायरेक्ट लिंक */}
+        <script src="https://tailwindcss.com"></script>
+        <script>
+          tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                  pearl: {
+                    50: '#FCFBF9',
+                    100: '#F3F0E9',
+                  },
+                  gold: {
+                    500: '#D4AF37',
+                    600: '#AA8C2C',
+                  },
+                  makhanaGreen: {
+                    800: '#1E3F20',
+                    900: '#112412',
+                  }
+                }
+              }
+            }
+          }
+        </script>
+      </head>
+      <body className="bg-[#FCFBF9] antialiased">
         <CartProvider>
           <Navbar />
           {children}
-          <footer className="bg-makhanaGreen-900 text-pearl-100/60 text-xs text-center py-8 border-t border-gold-500/10">
-            © {new Date().getFullYear()} Pratihast Pearls Premium Fox Nuts. From the Ponds of Mithila. All Rights Reserved.
+          <footer className="bg-[#112412] text-[#F3F0E9]/60 text-xs text-center py-8 border-t border-[#D4AF37]/10 mt-12">
+            © {new Date().getFullYear()} Pratihast Pearls Premium Fox Nuts. All Rights Reserved.
           </footer>
         </CartProvider>
       </body>
