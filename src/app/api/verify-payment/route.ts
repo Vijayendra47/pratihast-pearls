@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
+// ⚡ Next.js को बिल्ड के समय इस रूट को स्टेटिक कंपाइल करने से रोकने के लिए अनिवार्य लाइन
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = await request.json();
@@ -11,7 +14,6 @@ export async function POST(request: Request) {
 
     const secret = process.env.RAZORPAY_KEY_SECRET || '';
     
-    // रेज़रपे के नियमों के अनुसार सिग्नेचर स्ट्रिंग तैयार करना
     const signBody = razorpay_order_id + '|' + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac('sha256', secret)
@@ -21,7 +23,7 @@ export async function POST(request: Request) {
     if (expectedSignature === razorpay_signature) {
       return NextResponse.json({ status: 'success', message: 'Payment verified securely!' });
     } else {
-      return NextResponse.json({ status: 'failed', error: 'Cryptographic signature mismatch. Unauthorized transaction!' }, { status: 400 });
+      return NextResponse.json({ status: 'failed', error: 'Cryptographic signature mismatch.' }, { status: 400 });
     }
   } catch (error: any) {
     console.error('Signature Verification Error:', error);
