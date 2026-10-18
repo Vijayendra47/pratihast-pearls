@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/next/link';
+import Link from 'next/link';
 import { ShieldCheck, Heart, Award, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
