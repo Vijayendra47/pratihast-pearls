@@ -27,7 +27,7 @@ export default function ContactAndB2B() {
           </div>
 
           <div className="space-y-4 text-makhanaGreen-900 font-medium">
-            <div className="flex items-start space-x-3"><MapPin className="text-gold-500 mt-1 flex-shrink-0" /><div><strong>Registered Hub:</strong><p className="text-sm text-gray-600">Pratihast Pearls Infrastructure, Near Historic Ponds, Mithila Region, Bihar, India</p></div></div>
+            <div className="flex items-start space-x-3"><MapPin className="text-gold-500 mt-1 flex-shrink-0" /><div><strong>Registered Hub:</strong><p className="text-sm text-gray-600">Pratihast Pearls, Nagdah Balain, Benipatti, Madhubani, Bihar, India, 847222</p></div></div>
             <div className="flex items-center space-x-3"><Phone className="text-gold-500" /><span>+91 94314 74362</span></div>
             <div className="flex items-center space-x-3"><Mail className="text-gold-500" /><span>logistics@pratihastpearls.com</span></div>
           </div>
@@ -36,7 +36,7 @@ export default function ContactAndB2B() {
           <div className="w-full h-72 bg-gray-200 border-2 border-gold-500/20 rounded-2xl overflow-hidden relative shadow-inner flex items-center justify-center">
             <div className="absolute inset-0 bg-cover opacity-40 bg-[url('https://googleapis.com')]" />
             <div className="relative text-center p-4 bg-white/90 backdrop-blur-sm shadow-md rounded-xl mx-4">
-              <p className="font-bold text-sm text-makhanaGreen-900">Mithila Processing Unit Lat-Long Coordinate Link</p>
+              <p className="font-bold text-sm text-makhanaGreen-900">Pratihast Pearls</p>
               <a target="_blank" href="https://google.com" className="text-xs font-bold text-gold-600 underline mt-1 block">Launch Live Satellite Map</a>
             </div>
           </div>
