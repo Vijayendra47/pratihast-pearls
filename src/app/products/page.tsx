@@ -1,59 +1,61 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
+import { useCart } from '../../context/CartContext';
+import { useRouter } from 'next/navigation';
 
-export default function ContactAndB2B() {
-  const [b2bForm, setB2bForm] = useState({ clientName: '', bizName: '', email: '', qty: '', note: '' });
-  const [submitted, setSubmitted] = useState(false);
+const STATIC_PRODUCTS = [
+  { id: '1', name: 'Raw Premium Jumbo Pearls', desc: 'Handpicked giant grade raw makhana kernels.', weights: '500g', price: 420 },
+  { id: '2', name: 'Classic Himalayan Salted', desc: 'Lightly roasted in organic cow ghee and sea-salt.', weights: '250g', price: 290 },
+  { id: '3', name: 'Zesty Roasted Peri-Peri', desc: 'Spicy bold fusion for your savory gourmet cravings.', weights: '250g', price: 310 },
+  { id: '4', name: 'Refreshing Garden Mint', desc: 'Cool refreshing dried pudina infusion.', weights: '250g', price: 299 }
+];
 
-  const handleB2BSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+export default function ProductCatalog() {
+  const { addToCart } = useCart();
+  const router = useRouter();
 
   return (
-    <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 20px', fontFamily: 'serif', backgroundColor: '#FCFBF9' }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '50px' }}>
-        
-        {/* Left Side: Address Info */}
-        <div style={{ flex: '1 1 450px', minWidth: '300px' }}>
-          <h1 style={{ fontSize: '2.5rem', color: '#112412', margin: '0 0 10px 0' }}>Headquarters & Origins</h1>
-          <p style={{ color: '#666', marginBottom: '30px', fontSize: '1.1rem' }}>Our central processing unit is situated right at the heart of Mithila's finest natural water ecosystems.</p>
+    <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'serif', backgroundColor: '#FCFBF9' }}>
+      <h1 style={{ fontSize: '2.5rem', color: '#112412', borderBottom: '2px solid #D4AF37', paddingBottom: '15px', marginBottom: '40px' }}>Our Premium Collections</h1>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '30px' }}>
+        {STATIC_PRODUCTS.map((prod) => {
+          const itemId = `${prod.id}-${prod.weights}`;
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', color: '#112412', fontSize: '1.1rem' }}>
-            <div>📍 <strong>Registered Hub:</strong><p style={{ margin: '5px 0 0 0', color: '#555', fontSize: '1rem' }}>Pratihast Pearls, Nagdah Balain, Benipatti, Madhubani, Bihar, India, 847222</p></div>
-            <div>📞 <strong>Phone:</strong> <span style={{ color: '#555' }}>+91 94314 74362</span></div>
-            <div>✉️ <strong>Email:</strong> <span style={{ color: '#555' }}>logistics@pratihastpearls.com</span></div>
-          </div>
-
-          <div style={{ width: '100%', height: '250px', backgroundColor: '#EEE', border: '1px solid #D4AF37', borderRadius: '16px', marginTop: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#555' }}>
-            🗺️ [ Interactive Map Placeholder Layer ]
-          </div>
-        </div>
-
-        {/* Right Side: High-Yield B2B Form */}
-        <div style={{ flex: '1 1 450px', minWidth: '300px', backgroundColor: '#FFFFFF', padding: '40px', borderRadius: '24px', border: '1px solid #EEE', boxShadow: '0 4px 25px rgba(0,0,0,0.05)' }}>
-          <h2 style={{ fontSize: '1.8rem', color: '#112412', margin: '0 0 10px 0' }}>B2B Commercial Enquiry</h2>
-          <p style={{ color: '#777', fontSize: '0.9rem', marginBottom: '25px' }}>Connect with our primary supply desks for institutional pricing matrices.</p>
-          
-          {submitted ? (
-            <div style={{ padding: '20px', backgroundColor: '#F3F0E9', border: '1px solid #D4AF37', color: '#112412', borderRadius: '12px', textAlignment: 'center', fontWeight: 'bold' }}>
-              ✓ Wholesale Enquiry Transmitted Successfully!
+          return (
+            <div key={prod.id} style={{ backgroundColor: '#FFFFFF', borderRadius: '16px', overflow: 'hidden', border: '1px solid #EEE', padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'between', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+              <div style={{ backgroundColor: '#F3F0E9', height: '180px', borderRadius: '12px', display: 'flex', itemsCenter: 'center', justifyContent: 'center', color: '#888', position: 'relative', marginBottom: '15px', fontSize: '14px', fontWeight: 'bold', paddingTop: '75px' }}>
+                [ Premium Packaging ]
+                <span style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: '#1E3F20', color: '#D4AF37', fontSize: '12px', fontWeight: 'bold', padding: '4px 10px', borderRadius: '6px' }}>
+                  {prod.weights}
+                </span>
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.3rem', color: '#112412', margin: '0 0 10px 0', fontWeight: 'bold' }}>{prod.name}</h3>
+                <p style={{ fontSize: '0.85rem', color: '#666', margin: '0 0 15px 0', lineHeight: '1.4' }}>{prod.desc}</p>
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#112412', marginBottom: '20px' }}>₹{prod.price}</div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <button 
+                  onClick={() => addToCart({ id: itemId, name: prod.name, flavor: prod.name, weight: prod.weights, price: prod.price })}
+                  style={{ width: '100%', border: '2px solid #1E3F20', backgroundColor: 'transparent', color: '#1E3F20', fontWeight: 'bold', padding: '10px', borderRadius: '10px', cursor: 'pointer', fontSize: '14px' }}
+                >
+                  🛒 Add To Cart
+                </button>
+                <button 
+                  onClick={() => {
+                    addToCart({ id: itemId, name: prod.name, flavor: prod.name, weight: prod.weights, price: prod.price });
+                    router.push('/checkout');
+                  }}
+                  style={{ width: '100%', backgroundColor: '#D4AF37', border: 'none', color: '#112412', fontWeight: 'bold', padding: '10px', borderRadius: '10px', cursor: 'pointer', fontSize: '14px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}
+                >
+                  ⚡ Buy Now
+                </button>
+              </div>
             </div>
-          ) : (
-            <form onSubmit={handleB2BSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-              <input required type="text" placeholder="Your Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="text" placeholder="Company Legal Name" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="email" placeholder="Corporate Email Address" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <input required type="number" placeholder="Target Quantity Requirements (in kg)" style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px' }} />
-              <textarea placeholder="Tell us about your distribution parameters..." rows={4} style={{ padding: '12px', border: '1px solid #CCC', borderRadius: '8px', fontSize: '14px', resize: 'none' }} />
-              <button type="submit" style={{ backgroundColor: '#112412', color: '#D4AF37', border: 'none', fontWeight: 'bold', padding: '14px', borderRadius: '10px', cursor: 'pointer', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                Transmit Wholesale Request
-              </button>
-            </form>
-          )}
-        </div>
-
+          );
+        })}
       </div>
-    </main>
+    </section>
   );
 }
