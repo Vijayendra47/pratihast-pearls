@@ -2,6 +2,8 @@ import './globals.css';
 import React from 'react';
 import { CartProvider } from '../context/CartContext';
 import Navbar from '../components/Navbar';
+// Next.js का स्क्रिप्ट कॉम्पोनेंट इम्पोर्ट करें
+import Script from 'next/script';
 
 export const metadata = {
   title: 'Pratihast Pearls - Premium Mithila Fox Nuts',
@@ -13,32 +15,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Tailwind CSS का पक्का और सीधा डायरेक्ट लिंक */}
-        <script src="https://tailwindcss.com"></script>
-        <script>
-          tailwind.config = {
-            theme: {
-              extend: {
-                colors: {
-                  pearl: {
-                    50: '#FCFBF9',
-                    100: '#F3F0E9',
-                  },
-                  gold: {
-                    500: '#D4AF37',
-                    600: '#AA8C2C',
-                  },
-                  makhanaGreen: {
-                    800: '#1E3F20',
-                    900: '#112412',
+      </head>
+      <body className="bg-[#FCFBF9] antialiased">
+        {/* Tailwind CDN को सुरक्षित तरीके से लोड करने का तरीका */}
+        <Script 
+          src="https://tailwindcss.com" 
+          strategy="beforeInteractive"
+        />
+        
+        {/* कस्टम कलर थीम की सेटिंग्स */}
+        <Script id="tailwind-config" strategy="afterInteractive">
+          {`
+            tailwind.config = {
+              theme: {
+                extend: {
+                  colors: {
+                    pearl: { 50: '#FCFBF9', 100: '#F3F0E9' },
+                    gold: { 500: '#D4AF37', 600: '#AA8C2C' },
+                    makhanaGreen: { 800: '#1E3F20', 900: '#112412' }
                   }
                 }
               }
             }
-          }
-        </script>
-      </head>
-      <body className="bg-[#FCFBF9] antialiased">
+          `}
+        </Script>
+
         <CartProvider>
           <Navbar />
           {children}
