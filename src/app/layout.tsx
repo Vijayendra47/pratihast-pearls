@@ -2,8 +2,6 @@ import './globals.css';
 import React from 'react';
 import { CartProvider } from '../context/CartContext';
 import Navbar from '../components/Navbar';
-// Next.js का स्क्रिप्ट कॉम्पोनेंट इम्पोर्ट करें
-import Script from 'next/script';
 
 export const metadata = {
   title: 'Pratihast Pearls - Premium Mithila Fox Nuts',
@@ -15,31 +13,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
-      <body className="bg-[#FCFBF9] antialiased">
-        {/* Tailwind CDN को सुरक्षित तरीके से लोड करने का तरीका */}
-        <Script 
-          src="https://tailwindcss.com" 
-          strategy="beforeInteractive"
-        />
-        
-        {/* कस्टम कलर थीम की सेटिंग्स */}
-        <Script id="tailwind-config" strategy="afterInteractive">
-          {`
-            tailwind.config = {
-              theme: {
-                extend: {
-                  colors: {
-                    pearl: { 50: '#FCFBF9', 100: '#F3F0E9' },
-                    gold: { 500: '#D4AF37', 600: '#AA8C2C' },
-                    makhanaGreen: { 800: '#1E3F20', 900: '#112412' }
-                  }
-                }
-              }
+        {/* 📱 मोबाइल और टैबलेट व्यू को 100% परफेक्ट बनाने के लिए ग्लोबल CSS मैजिक */}
+        <style>{`
+          /* मोबाइल रिस्पॉन्सिव ग्रिड लेआउट */
+          @media (max-width: 768px) {
+            div, section, main {
+              grid-template-columns: 1fr !important; /* सभी ग्रिड सिंगल कॉलम हो जाएंगे */
+              flex-direction: column !important;     /* फ्लेक्स बॉक्स एक के नीचे एक आ जाएंगे */
             }
-          `}
-        </Script>
-
+            nav {
+              padding: 10px 15px !important;
+              flex-direction: row !important;       /* नेवबार का अलाइनमेंट सही रखने के लिए */
+            }
+            nav div {
+              gap: 12px !important;                 /* मोबाइल मेनू में गैप कम करने के लिए */
+            }
+            h1 {
+              font-size: 2rem !important;           /* हेडिंग का साइज मोबाइल के हिसाब से */
+            }
+            h2 {
+              font-size: 1.6rem !important;
+            }
+            form {
+              padding: 10px !important;
+            }
+            input, textarea, button {
+              font-size: 16px !important;          /* मोबाइल पर ज़ूम इन न हो इसलिए */
+            }
+          }
+        `}</style>
+      </head>
+      <body className="bg-[#FCFBF9] antialiased" style={{ margin: 0, padding: 0 }}>
         <CartProvider>
           <Navbar />
           {children}
