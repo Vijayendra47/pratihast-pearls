@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // ⚡ रेज़रपे पैकेज को सर्वर बिल्ड ऑप्टिमाइज़र से बाहर रखने की मुख्य सेटिंग
+  serverExternalPackages: ['razorpay'],
+  
   typescript: {
-    // This allows the build to finish successfully even if local type libraries aren't fully configured
     ignoreBuildErrors: true,
   },
   eslint: {
