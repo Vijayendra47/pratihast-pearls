@@ -67,7 +67,7 @@ export default function CheckoutPage() {
 
   return (
     <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 20px', fontFamily: 'serif', backgroundColor: '#FCFBF9' }}>
-      <Script src="https://razorpay.com" strategy="lazyOnload" />
+      <Script src="https://razorpay.com" strategy="beforeInteractive" />
       <h1 style={{ fontSize: '2.5rem', color: '#112412', borderBottom: '2px solid #D4AF37', paddingBottom: '15px', marginBottom: '40px' }}>Secure Checkout</h1>
       
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
