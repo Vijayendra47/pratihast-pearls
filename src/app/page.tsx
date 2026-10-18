@@ -1,53 +1,152 @@
 import React from 'react';
-import Link from 'next/link';
-import { ShieldCheck, Heart, Award, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   return (
-    <main className="bg-pearl-50 min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-makhanaGreen-900 text-pearl-50 py-28 px-4 border-b-4 border-gold-500 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#AA8C2C_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
-        <div className="max-w-4xl mx-auto relative z-10 space-y-6">
-          <span className="text-gold-500 uppercase tracking-widest font-semibold text-sm block">Authentic Organic Superfood</span>
-          <h1 className="text-4xl sm:text-6xl font-serif font-bold tracking-tight leading-tight">
-            Pratihast Pearls <br /> <span className="text-gold-500">Premium Fox Nuts</span>
+    <main style={{
+      backgroundColor: '#FCFBF9',
+      minHeight: '100vh',
+      fontFamily: 'serif',
+      margin: 0,
+      padding: 0,
+      color: '#112412'
+    }}>
+      {/* Premium Hero Section */}
+      <section style={{
+        backgroundColor: '#112412',
+        color: '#FCFBF9',
+        padding: '80px 20px',
+        textAlign: 'center',
+        borderBottom: '4px solid #D4AF37',
+        position: 'relative'
+      }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <span style={{
+            color: '#D4AF37',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+            fontWeight: 'bold',
+            fontSize: '14px',
+            display: 'block',
+            marginBottom: '10px'
+          }}>
+            Authentic Organic Superfood
+          </span>
+          <h1 style={{
+            fontSize: '3rem',
+            margin: '0 0 20px 0',
+            fontWeight: 'bold',
+            lineHeight: '1.2'
+          }}>
+            Pratihast Pearls <br />
+            <span style={{ color: '#D4AF37' }}>Premium Fox Nuts</span>
           </h1>
-          <p className="text-lg sm:text-xl text-pearl-100 max-w-2xl mx-auto font-light italic">
+          <p style={{
+            fontSize: '1.2rem',
+            color: '#F3F0E9',
+            maxWidth: '600px',
+            margin: '0 auto 30px auto',
+            fontStyle: 'italic',
+            fontWeight: '300'
+          }}>
             "Harvested meticulously from the sacred, nutrient-dense Ponds of Mithila to bring crispy, unblemished luxury to your healthy lifestyle."
           </p>
-          <div className="pt-4">
-            <Link href="/products" className="inline-flex items-center space-x-2 bg-gold-500 hover:bg-gold-600 text-makhanaGreen-900 font-bold px-8 py-4 rounded-full transition shadow-xl text-lg group">
-              <span>Explore The Collection</span>
-              <ArrowRight size={20} className="transform group-hover:translate-x-1 transition" />
-            </Link>
+          <div>
+            <a href="/products" style={{
+              backgroundColor: '#D4AF37',
+              color: '#112412',
+              fontWeight: 'bold',
+              padding: '15px 35px',
+              borderRadius: '30px',
+              textDecoration: 'none',
+              fontSize: '1.1rem',
+              display: 'inline-block',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
+            }}>
+              Explore The Collection →
+            </a>
           </div>
         </div>
       </section>
 
       {/* Why Mithila Makhana Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-makhanaGreen-900 mb-4">Why Mithila Makhana?</h2>
-          <div className="w-24 h-1 bg-gold-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">The geographical conditions of Mithila infuse every Fox Nut with high calcium, protein, and strong anti-aging antioxidants.</p>
+      <section style={{
+        padding: '60px 20px',
+        maxWidth: '1200px',
+        margin: '0 auto',
+        textAlign: 'center'
+      }}>
+        <div style={{ maxWidth: '700px', margin: '0 auto 50px auto' }}>
+          <h2 style={{
+            fontSize: '2.5rem',
+            color: '#112412',
+            margin: '0 0 10px 0'
+          }}>
+            Why Mithila Makhana?
+          </h2>
+          <div style={{
+            width: '80px',
+            height: '4px',
+            backgroundColor: '#D4AF37',
+            margin: '0 auto 20px auto'
+          }}></div>
+          <p style={{ color: '#555', fontSize: '1.1rem' }}>
+            The geographical conditions of Mithila infuse every Fox Nut with high calcium, protein, and strong anti-aging antioxidants.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-100/50 text-center space-y-4">
-            <div className="inline-flex p-4 bg-gold-500/10 text-gold-600 rounded-full"><Award size={32} /></div>
-            <h3 className="text-xl font-bold text-makhanaGreen-900">GI Tagged Authenticity</h3>
-            <p className="text-gray-600 text-sm">Sourced entirely from clean-water ecological pond systems native exclusively to northern Bihar.</p>
+        {/* Features Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '30px',
+          padding: '0 10px'
+        }}>
+          {/* Card 1 */}
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            padding: '40px 20px',
+            borderRadius: '16px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+            border: '1px solid #EEE'
+          }}>
+            <h3 style={{ color: '#112412', fontSize: '1.4rem', margin: '0 0 15px 0' }}>
+              🏅 GI Tagged Authenticity
+            </h3>
+            <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+              Sourced entirely from clean-water ecological pond systems native exclusively to northern Bihar.
+            </p>
           </div>
-          <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-100/50 text-center space-y-4">
-            <div className="inline-flex p-4 bg-gold-500/10 text-gold-600 rounded-full"><Heart size={32} /></div>
-            <h3 className="text-xl font-bold text-makhanaGreen-900">Zero Guilt Superfood</h3>
-            <p className="text-gray-600 text-sm">Low glycemic index, gluten-free, cholesterol-free. Excellent snack for heart health and diabetes management.</p>
+
+          {/* Card 2 */}
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            padding: '40px 20px',
+            borderRadius: '16px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+            border: '1px solid #EEE'
+          }}>
+            <h3 style={{ color: '#112412', fontSize: '1.4rem', margin: '0 0 15px 0' }}>
+              ❤️ Zero Guilt Superfood
+            </h3>
+            <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+              Low glycemic index, gluten-free, cholesterol-free. Excellent snack for heart health and diabetes management.
+            </p>
           </div>
-          <div className="bg-white p-8 rounded-2xl border border-gray-100 shadow-xl shadow-gray-100/50 text-center space-y-4">
-            <div className="inline-flex p-4 bg-gold-500/10 text-gold-600 rounded-full"><ShieldCheck size={32} /></div>
-            <h3 className="text-xl font-bold text-makhanaGreen-900">Premium Grade Sizing</h3>
-            <p className="text-gray-600 text-sm">Only jumbo-sized kernels resembling pristine white "Pearls" cross our automated quality screening lines.</p>
+
+          {/* Card 3 */}
+          <div style={{
+            backgroundColor: '#FFFFFF',
+            padding: '40px 20px',
+            borderRadius: '16px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+            border: '1px solid #EEE'
+          }}>
+            <h3 style={{ color: '#112412', fontSize: '1.4rem', margin: '0 0 15px 0' }}>
+              ⭐ Premium Grade Sizing
+            </h3>
+            <p style={{ color: '#666', fontSize: '0.95rem', lineHeight: '1.6' }}>
+              Only jumbo-sized kernels resembling pristine white "Pearls" cross our automated quality screening lines.
+            </p>
           </div>
         </div>
       </section>
